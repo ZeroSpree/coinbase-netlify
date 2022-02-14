@@ -10,11 +10,10 @@
   ],
   "scripts": {
     "watch:sass": "sass --embed-sources --watch src/assets/sass:dist/assets/css",
-    "build:sass": "npm-run-all cssbuild:sass cssbuild:postcss cssbuild:purgecss",
+    "build:sass": "npm-run-all cssbuild:sass cssbuild:postcss",
     "cssbuild:sass": "sass --no-source-map src/assets/sass:dist/assets/css",
     "cssbuild:postcss": "postcss --no-map dist/assets/css/*.css -u autoprefixer cssnano -r",
-    "cssbuild:purgecss": "purgecss --config ./purgecss.config.js --output dist/assets/css/main.css",
-    "postbuild": "npm-run-all cssbuild:postcss cssbuild:purgecss",
+    "postbuild": "npm-run-all cssbuild:postcss",
     "watch:js": "watchify --debug -t [ babelify --presets [ @babel/preset-env ] ] src/assets/js/main.js -o dist/assets/js/bundle.js",
     "build:js": "browserify src/assets/js/main.js -t [ babelify --presets [ @babel/preset-env ] ] | uglifyjs -cm > dist/assets/js/bundle.js",
     "watch:eleventy": "eleventy --serve --config=eleventy.config.js",
@@ -22,8 +21,7 @@
     "clean:dist": "del-cli dist",
     "mkdir:js": "make-dir dist/assets/js",
     "start": "npm-run-all clean:dist mkdir:js --parallel watch:*",
-    "build": "cross-env ELEVENTY_ENV=production npm-run-all clean:dist mkdir:js build:*",
-    "lighthouse": "cross-env ELEVENTY_ENV=production node 11ty/tests/lighthouse.js"
+    "build": "cross-env ELEVENTY_ENV=production npm-run-all clean:dist mkdir:js build:*"
   },
   "browserslist": [
     "last 2 versions",
@@ -35,7 +33,6 @@
     "@11ty/eleventy-img": "^0.10.0",
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
-    "@fullhuman/postcss-purgecss": "^4.0.2",
     "autoprefixer": "^10.3.7",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
@@ -45,18 +42,15 @@
     "del-cli": "^4.0.1",
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
-    "lighthouse-batch": "^8.1.1",
     "make-dir-cli": "^3.0.0",
     "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
     "postcss": "^8.1.10",
     "postcss-cli": "^9.0.1",
-    "purgecss": "^4.0.2",
     "sass": "^1.29.0",
     "watchify": "^4.0.0"
   },
   "dependencies": {
-    "axios": "^0.21.4",
-    "cash-dom": "^8.1.0"
+    "axios": "^0.21.4"
   }
 }
