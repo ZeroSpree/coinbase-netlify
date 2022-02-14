@@ -1,0 +1,19 @@
+.table {
+  .is-alert_lt {
+    background: black;
+    color: white;
+  }
+
+  .is-alert_gt {
+    background: red;
+    color: white;
+  }
+
+  td {
+    padding: 4px 8px;
+  }
+
+  &__links {
+    display: flex;
+  }
+}

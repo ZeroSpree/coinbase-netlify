@@ -1,0 +1,32 @@
+<!-- _includes/sharebar.njk -->
+
+<div class="sharebar">
+  <ul class="sharebar__list">
+    <li>
+      <a class="js--share" href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | url | absurl | urlencode }}">
+        <span class="a11y">Share on Facebook</span>
+        {% svg "facebook.svg" %}
+      </a>
+    </li>
+    <li>
+      <a class="js--share" href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | url | absurl | urlencode }}&title={{ title | urlencode }}">
+        <span class="a11y">Share on LinkedIn</span>
+        {% svg "linkedin.svg" %}
+      </a>
+    </li>
+    <li>
+      <a href="https://twitter.com/intent/tweet?url={{ page.url | url | absurl | urlencode }}" class="js--share">
+        <span class="a11y">Share on Twitter</span>
+        {% svg "twitter.svg" %}
+      </a>
+    </li>
+    <li>
+      <a href="mailto:?subject={{ title | urlencode }}&body={{ page.url | url | absurl | urlencode }}">
+        <span class="a11y">Share by Email</span>
+        {% svg "email.svg" %}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- / _includes/sharebar.njk -->

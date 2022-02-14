@@ -1,0 +1,18 @@
+.statusbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #222;
+  color: white;
+  padding: 16px 0;
+
+  &.is-active {
+    background: red;
+    color: white;
+  }
+
+  .wrapper {
+    display: flex;
+  }
+}

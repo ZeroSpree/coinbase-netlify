@@ -1,0 +1,48 @@
+<!-- includes/meta.njk -->
+
+  {% set canonical = page.url | url | absurl -%}
+  {%- set metaTitle = (meta_title or title or global.meta_title) | striptags(true) | trim | safe -%}
+  {%- set metaDescription = (meta_description or global.meta_description) | striptags(true) | truncate(160) | trim | safe -%}
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0">
+  <link rel="canonical" href="{{ canonical }}">
+  <meta property="og:url" content="{{ canonical }}">
+
+{# Hide from SE #}
+  {% if global.disallow_search_engines %}
+  <meta name="robots" content="noindex, nofollow">
+  {%- endif -%}
+
+{# Title #}
+  {% if metaTitle %}
+  <title>{{ metaTitle }}</title>
+  <meta property="og:title" content="{{ metaTitle }}">
+  <meta name="twitter:title" content="{{ metaTitle }}">
+  {%- endif -%}
+
+{# Description #}
+  {% if metaDescription %}
+  <meta name="description" content="{{ metaDescription }}">
+  <meta property="og:description" content="{{ metaDescription }}">
+  <meta name="twitter:description" content="{{ metaDescription }}">
+  {%- endif -%}
+
+{# Meta Image #}
+  {% if meta_image or global.meta_image -%}
+  {% set metaImage = ["/assets/img/", (meta_image or global.meta_image)] | join %}
+  <meta property="og:image" content="{{ metaImage | url | absurl }}">
+  <meta name="twitter:image" content="{{ metaImage | url | absurl }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  {%- endif -%}
+
+{# OG and Twitter #}
+  {% if global.site_name %}
+  <meta property="og:site_name" content="{{ global.site_name }}">
+  {%- endif %}
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+<!-- / includes/meta.njk -->

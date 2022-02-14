@@ -1,0 +1,76 @@
+---
+layout: base.njk
+---
+
+<div class="wrapper" id="app">
+  {% raw %}
+    <header class="statusbar" :class="alarm_active ? 'is-active' : ''">
+      <div class="wrapper">
+        <div>Total Assets: {{ coins.length }}</div>
+        <label class="btn" :class="alerts ? 'is-active' : ''">
+          <input type="checkbox" v-model="alerts"/>
+          Alerts
+          <span v-if="alerts">Enabled</span>
+          <span v-else>Disabled</span>
+        </label>
+      </div>
+    </header>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Links</th>
+          <th>Price</th>
+          <th>1Hr. Change</th>
+          <th>Alarms</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr v-for="coin in coins" 
+          :class="[
+            coin.alert_lt ? 'is-alert_lt' : '',
+            coin.alert_gt ? 'is-alert_gt' : ''
+          ]">
+          <td>{{ coin.symbol }}</td>
+          <td>
+            <div class="table__links">
+              <a :href="'https://pro.coinbase.com/trade/'+ coin.symbol + '-USDT'" class="coin__view" title="USDT" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000" width="24"><path d="M1000,0c552.26,0,1000,447.74,1000,1000S1552.24,2000,1000,2000,0,1552.38,0,1000,447.68,0,1000,0" fill="#53ae94"/><path d="M1123.42,866.76V718H1463.6V491.34H537.28V718H877.5V866.64C601,879.34,393.1,934.1,393.1,999.7s208,120.36,484.4,133.14v476.5h246V1132.8c276-12.74,483.48-67.46,483.48-133s-207.48-120.26-483.48-133m0,225.64v-0.12c-6.94.44-42.6,2.58-122,2.58-63.48,0-108.14-1.8-123.88-2.62v0.2C633.34,1081.66,451,1039.12,451,988.22S633.36,894.84,877.62,884V1050.1c16,1.1,61.76,3.8,124.92,3.8,75.86,0,114-3.16,121-3.8V884c243.8,10.86,425.72,53.44,425.72,104.16s-182,93.32-425.72,104.18" fill="#fff"/></svg>
+              </a>
+
+              <a class="coin__view" title="Coinbase Pro" target="_blank" :href="'https://pro.coinbase.com/trade/'+ coin.symbol + '-USD'">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve" width="24">
+                  <g>
+                    <circle fill="#000" class="st1" cx="512" cy="512" r="512"/>
+                    <path fill="#fff" class="st2" d="M559.2,672c26.2,0,52.4-5.8,75.6-14.5l49.4,75.6c-43.6,23.3-90.2,34.9-139.6,34.9
+                      c-148.3,0-258.9-98.9-258.9-256c2.9-157.1,116.4-256,261.8-256c52.4,0,90.2,11.6,130.9,32l-46.5,78.5
+                      c-23.3-8.7-49.4-14.5-75.6-14.5c-87.3,0-157.1,55.3-157.1,160C399.2,610.9,466.1,672,559.2,672z"/>
+                  </g>
+                </svg>
+              </a>
+
+              <a class="coin__view" title="TradingView" target="_blank" :href="'https://www.tradingview.com/chart/?symbol='+ coin.symbol + 'USD'">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" width="24">
+                  <g>
+                    <path style="stroke-width: 0px; stroke: rgb(41, 98, 255); stroke-miterlimit: 1; paint-order: stroke; fill: rgb(41, 98, 255);" d="M 74.268 158.688 L 216.747 158.711 L 217.506 338.161 L 145.466 337.657 L 145.445 229.983 L 74.2 229.871 L 74.268 158.688 Z"/>
+                    <circle style="fill: rgb(41, 98, 255);" cx="270.59" cy="192.178" r="35.956"/>
+                    <polygon style="stroke: rgb(0, 0, 0); fill: rgb(41, 98, 255); stroke-width: 0px;" points="343.41 158.808 426.417 158.896 351.232 336.856 269.104 336.679 342.837 158.951"/>
+                  </g>
+                </svg>
+              </a>
+            </div>
+          </td>
+          <td>{{ coin.latest | number }}</td>
+          <td>{{ coin.latest_price.percent_change.hour | percent }}%</td>
+          <td>
+            <input placeholder="Less than" @keyup="updateurl" v-model="whitelist[coin.symbol].price_lt"/>
+            <input placeholder="More than" @keyup="updateurl" v-model="whitelist[coin.symbol].price_gt"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  {% endraw %}
+</div>

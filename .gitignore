@@ -1,0 +1,20 @@
+# build artefacts
+dist
+src/includes/min/
+
+# tests reports
+reports
+# npm related files
+node_modules
+# exclude package-lock.json so Sharp can install on various node version
+package-lock.json
+
+# OS related files
+.DS_Store
+Thumbs.db
+
+# Other tooling, vim, WSL, VSCode
+*.bak
+*.swp
+*:Zone.Identifier
+*.code-workspace
