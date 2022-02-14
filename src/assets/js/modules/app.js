@@ -2,6 +2,8 @@ const axios = require("axios");
 const refreshRate = 1000 * 1000;
 const alertAudio = new Audio('./assets/audio/alert.wav');
 
+if(global.environment == 'production') refreshRate = 10*1000;
+
 window.vm = new Vue({
   el: '#app',
 

@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% include "meta.njk" %}
-    {% include "favicon.njk" %}
-    {% include "styles.njk" %}
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}?{{ global.buildtime }}"/>
   </head>
 
   <body>
-    {% include "header.njk" %}
-
     <main aria-label="Main Content">
       {{ content | safe }}
     </main>
 
-    {% include "footer.njk" %}
-    {% include "scripts.njk" %}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="{{ '/assets/js/bundle.js' | url }}?{{ global.buildtime }}"></script>
   </body>
 </html>
