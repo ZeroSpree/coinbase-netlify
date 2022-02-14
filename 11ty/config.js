@@ -13,19 +13,7 @@ const isProduction = process.env.ELEVENTY_ENV === 'production';
 module.exports = {
   ISPROD: isProduction,
 
-  // Extranet credentials
-  // user: 'EXTRANET_USER',
-  // pass: 'EXTRANET_PASSWORD', 
-
   // Internal Stage Settings
   BASEURL: isProduction ? "" : "",
-  PRODURL: isProduction ? "https://www.dei.dominionenergy.com" : "",
-
-  // Client Review Settings
-  // BASEURL: isProduction ? "/PROJECT_NAME/clientreview" : "",
-  // PRODURL: isProduction ? "https://client.ideasonpurpose.com" : "",
-
-  // Production Settings
-  // BASEURL: isProduction ? "/" : "",
-  // PRODURL: isProduction ? "https://clientdomain.com" : "",
+  PRODURL: isProduction ? "https://wizardly-easley-4e1667.netlify.app" : ""
 };
