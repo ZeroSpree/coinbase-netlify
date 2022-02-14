@@ -1,8 +1,11 @@
 const axios = require("axios");
-const refreshRate = 1000 * 1000;
 const alertAudio = new Audio('./assets/audio/alert.wav');
+const $html = document.getElementsByTagName('html')[0];
+let refreshRate = 10 * 1000;
 
-if(global.environment == 'production') refreshRate = 10*1000;
+if( $html.getAttribute('data-env') != 'production' ) {
+  refreshRate = 1000*1000;
+}
 
 window.vm = new Vue({
   el: '#app',
@@ -36,8 +39,6 @@ window.vm = new Vue({
         var price = Number(vm.coins[coin]['latest']);
         var price_lt = Number(vm.whitelist[symbol].price_lt);
         var price_gt = Number(vm.whitelist[symbol].price_gt);
-
-        console.log(price, price_lt, price_gt);
 
         var lt = price_lt && price <= price_lt;
         var gt = price_gt && price >= price_gt;
